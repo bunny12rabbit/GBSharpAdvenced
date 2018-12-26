@@ -16,7 +16,11 @@ namespace HW1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form form = new Form();
+            form.Width = 800;
+            form.Height = 600;
+            Game.Init(form);
+            Application.Run(form);
         }
     }
 }
