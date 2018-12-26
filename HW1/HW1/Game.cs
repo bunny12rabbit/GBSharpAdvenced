@@ -30,7 +30,7 @@ namespace HW1
             Height = form.ClientSize.Height;
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
             Load();
-            Timer timer = new Timer { Interval = 100 };
+            Timer timer = new Timer { Interval = 50 };
             timer.Start();
             timer.Tick += Timer_Tick;
         }
