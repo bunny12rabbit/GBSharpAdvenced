@@ -20,16 +20,32 @@ namespace HW1
         //Отрисовка
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(bmp, Pos.X, Pos.Y, Size.Width, Size.Height);
+            if (SplashScreen.splash)
+            {
+                SplashScreen.Buffer.Graphics.DrawImage(bmp, Pos.X, Pos.Y, Size.Width, Size.Height);
+            }
+            else
+            {
+                Game.Buffer.Graphics.DrawImage(bmp, Pos.X, Pos.Y, Size.Width, Size.Height);
+            }
         }
 
         //Обновление позиции
         public override void Update()
         {
-            Pos.X += Dir.X;
-            Pos.Y += Dir.Y;
-            if (Pos.X < 0 || Pos.X > Game.Width) Dir.X = -Dir.X;
-            if (Pos.Y < 0 || Pos.Y > Game.Height) Dir.Y = -Dir.Y;
+            if (SplashScreen.splash)
+            {
+                Pos.X += Dir.X;
+                Pos.Y += Dir.Y;
+                if (Pos.X < 0 || Pos.X > SplashScreen.Width) Dir.X = -Dir.X;
+                if (Pos.Y < 0 || Pos.Y > SplashScreen.Height) Dir.Y = -Dir.Y;
+            } else
+            {
+                Pos.X += Dir.X;
+                Pos.Y += Dir.Y;
+                if (Pos.X < 0 || Pos.X > Game.Width) Dir.X = -Dir.X;
+                if (Pos.Y < 0 || Pos.Y > Game.Height) Dir.Y = -Dir.Y;
+            }
         }
 
     }

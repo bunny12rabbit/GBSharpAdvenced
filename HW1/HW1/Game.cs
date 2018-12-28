@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace HW1
 {
-    static class Game
+     class Game
     {
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
@@ -33,14 +33,14 @@ namespace HW1
             //Выбрасываем исключение если размер окна задан меньше 0 или больше 1000. Если < 0, то задается разрешение 800х600
             try
             {
-                Width = form.ClientSize.Width;
-                Height = form.ClientSize.Height;
+                Width = Screen.PrimaryScreen.Bounds.Width;//form.ClientSize.Width;
+                Height = Screen.PrimaryScreen.Bounds.Height;//form.ClientSize.Height;
                 if (Width > 1000 || Height >1000 || Width < 0 || Height < 0) { throw new ArgumentOutOfRangeException(); }
             }
             catch (ArgumentOutOfRangeException e)
             {
 
-                MessageBox.Show("Размер экрана больше 1000 или меньше 0", "Не знаю зачем, но сказали вывести! :)");
+                //MessageBox.Show("Размер экрана больше 1000 или меньше 0", "Не знаю зачем, но сказали вывести! :)");
                 if (Width < 0 || Height < 0) { Width = 800; Height = 600; }
             }
 
@@ -49,7 +49,7 @@ namespace HW1
             Timer timer = new Timer { Interval = 50 };
             timer.Start();
             timer.Tick += Timer_Tick;
-            form.KeyPress += new KeyPressEventHandler(Shoot);
+            form.KeyPress += new KeyPressEventHandler(KeyPressed);
         }
         
         //Действия таймера для обновления экрана
@@ -59,11 +59,16 @@ namespace HW1
             Update();
         }
 
-        //Выстре по SpaceBar
-        private static void Shoot (object sender, KeyPressEventArgs e)
+        //Обработка нажатия кнопок (Выстрел и ESC для выхода)
+        private static void KeyPressed (object sender, KeyPressEventArgs e)
         {
 
             if (e.KeyChar == (char)Keys.Space) { _bullet.Draw(); System.Media.SystemSounds.Beep.Play(); Buffer.Render(); }
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                if (MessageBox.Show("Уходите? Так быстро? :(", "Asteroid Game", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                    Application.Exit();
+            }
         }
 
         //Отрисовка
@@ -129,7 +134,7 @@ namespace HW1
                     dirStar = rnd.Next(-10, 10);
                 }
                 while (dirStar == 0);
-                _objs[i] = new Star(new Point(rnd.Next(0, Game.Width), rnd.Next(0, Game.Height)), new Point(-dirStar, dirStar), new Size(3, 3));
+                _objs[i] = new Star(new Point(rnd.Next(0, Width), rnd.Next(0, Height)), new Point(-dirStar, dirStar), new Size(3, 3));
             }
             //Инициализация астероидов
             for (int i = 0; i < _asteroids.Length; i++)
@@ -143,7 +148,7 @@ namespace HW1
                     dirAsteroid = rnd.Next(-5, 5);
                 }
                 while (dirAsteroid == 0);
-                _asteroids[i] = new Asteroid(new Point(rnd.Next(0, Game.Width), rnd.Next(0, Game.Height)), new Point(dirAsteroid, dirAsteroid), new Size(aSize, aSize));
+                _asteroids[i] = new Asteroid(new Point(rnd.Next(0, Width), rnd.Next(0, Height)), new Point(dirAsteroid, dirAsteroid), new Size(aSize, aSize));
             }
         }
     }
