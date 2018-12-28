@@ -108,21 +108,35 @@ namespace HW1
         //Инициализация объектов
         public static void Load ()
         {
-            _objs = new BaseObject[30];
+            _objs = new BaseObject[50]; //Звезды
             _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
             _asteroids = new Asteroid[3];
             Random rnd = new Random();
             //Инициализация звезд
             for (int i = 0; i < _objs.Length; i++)
             {
-                int r = rnd.Next(5, 50);
-                _objs[i] = new Star(new Point(1000, rnd.Next(0, Game.Height)), new Point(-r, r), new Size(3, 3));
+                //Направление звезды
+                int dirStar;
+                do
+                {
+                    dirStar = rnd.Next(-10, 10);
+                }
+                while (dirStar == 0);
+                _objs[i] = new Star(new Point(rnd.Next(0, Game.Width), rnd.Next(0, Game.Height)), new Point(-dirStar, dirStar), new Size(3, 3));
             }
             //Инициализация астероидов
             for (int i = 0; i < _asteroids.Length; i++)
             {
-                int r = rnd.Next(20, 80);
-                _asteroids[i] = new Asteroid(new Point(1000, rnd.Next(0, Game.Height)), new Point(rnd.Next(-5, 5), rnd.Next(-5, 5)), new Size(r, r));
+                //Размер астероида
+                int aSize = rnd.Next(20, 80);
+                //Направление астероида
+                int dirAsteroid;
+                do
+                {
+                    dirAsteroid = rnd.Next(-5, 5);
+                }
+                while (dirAsteroid == 0);
+                _asteroids[i] = new Asteroid(new Point(rnd.Next(0, Game.Width), rnd.Next(0, Game.Height)), new Point(dirAsteroid, dirAsteroid), new Size(aSize, aSize));
             }
         }
     }
