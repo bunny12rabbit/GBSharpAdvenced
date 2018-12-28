@@ -109,7 +109,14 @@ namespace HW1
         public static void Load ()
         {
             _objs = new BaseObject[50]; //Звезды
-            _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
+            try
+            {
+                _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
+            }
+            catch (GameObjectException e)
+            {
+                _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
+            }
             _asteroids = new Asteroid[3];
             Random rnd = new Random();
             //Инициализация звезд

@@ -15,8 +15,10 @@ namespace HW1
 
         protected BaseObject (Point pos, Point dir, Size size)
         {
+            if (pos.X < 0 || pos.Y < 0) throw new GameObjectException("Отрицательные координаты для создания объекта запрещены!");
             Pos = pos;
             Dir = dir;
+            if (size.Height < 0 || size.Width < 0) throw new GameObjectException("Отрицательный размер для создания объекта запрещены!");
             Size = size;
         }
 
