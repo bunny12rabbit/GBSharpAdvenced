@@ -210,8 +210,9 @@ namespace HW1
             }
             else
             {
-                //e.Cancel = false;
-                Application.Exit();
+                e.Cancel = false;
+                Program.form1.Close();
+                //Application.Exit();
             }
         }
 

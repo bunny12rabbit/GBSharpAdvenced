@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HW1
 {
-    class Asteroid : BaseObject
+    class Asteroid : BaseObject, ICloneable, IComparable<Asteroid>
     {
-        public int Power { get; set; }
+        public int Power { get; set; } = 3;
         Bitmap bmp = new Bitmap("asteroid.png");
 
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
@@ -48,5 +48,18 @@ namespace HW1
             }
         }
 
+        public object Clone()
+        {
+            Asteroid asteroid = new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height)) { Power = Power };
+            return asteroid;
+        }
+
+        public int CompareTo(Asteroid obj)
+        {
+                if (Power > obj.Power) return 1;
+                if (Power < obj.Power) return -1;
+                else
+                    return 0;
+        }
     }
 }
