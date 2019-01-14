@@ -10,7 +10,7 @@ namespace HW1
     class Asteroid : BaseObject, ICloneable, IComparable<Asteroid>
     {
         public int Power { get; set; } = 3;
-        Bitmap bmp = new Bitmap("asteroid.png");
+        Bitmap bmp = new Bitmap(Properties.Resources.asteroid);
 
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
@@ -60,6 +60,15 @@ namespace HW1
                 if (Power < obj.Power) return -1;
                 else
                     return 0;
+        }
+
+        //Сбрасываем позицию
+        public virtual void ResetPos()
+        {
+            Random rnd = new Random();
+            Pos.X = rnd.Next(0, Game.Width);
+            Pos.Y = rnd.Next(0, Game.Height);
+            Dir = new Point(rnd.Next(-10, 10), rnd.Next(-10, 10));
         }
     }
 }

@@ -33,14 +33,5 @@ namespace HW1
 
         public abstract void Update();
 
-        //Сбрасываем позицию
-        public virtual void ResetPos()
-        {
-            Random rnd = new Random();
-            Pos.X = rnd.Next(0, Game.Width);
-            Pos.Y = rnd.Next(0, Game.Height);
-        }
-
-
     }
 }

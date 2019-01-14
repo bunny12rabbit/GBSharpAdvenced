@@ -55,11 +55,14 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameObjectException.cs" />
     <Compile Include="ICollision.cs" />
+    <Compile Include="LogData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepairKit.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Star.cs" />
+    <Compile Include="Win32.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -68,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -84,6 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="asteroid.ico" />
+    <None Include="bin\Debug\ship.png" />
+    <None Include="bin\Debug\recovery.png" />
+    <None Include="bin\Debug\planet.png" />
+    <None Include="bin\Debug\asteroid.png" />
+    <None Include="Resources\recovery.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

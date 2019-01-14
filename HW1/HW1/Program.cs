@@ -27,6 +27,7 @@ namespace HW1
             {
                 Width = Screen.PrimaryScreen.Bounds.Width,
                 Height = Screen.PrimaryScreen.Bounds.Height
+
             };
             form.WindowState = FormWindowState.Maximized;
             form.Text = "Asteroid Game";

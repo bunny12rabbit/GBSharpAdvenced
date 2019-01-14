@@ -10,14 +10,30 @@ namespace HW1
     class Ship : BaseObject
     {
         private int _energy = 100;
+        private int _score = 0;
         public int Energy => _energy;
-        Bitmap bmp =  new Bitmap("ship.png");
+        public int Score => _score;
+        Bitmap bmp =  new Bitmap(Properties.Resources.ship);
 
         public static event Message MessageDie;
+        public static LogData logdata = new LogData();
 
         public void EnergyDown (int n)
         {
             _energy -= n;
+            Log log = new Log(logdata.LogConsoleWrite);
+            log($"Получено {n} урона");
+        }
+
+        internal void EnergyUp(int n)
+        {
+            _energy += n;
+            Log log = new Log(logdata.LogConsoleWrite);
+            log($"Восстановлено {n} здоровья");
+        }
+        public void AddScore (int n)
+        {
+            _score += n;
         }
 
         public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
@@ -47,5 +63,7 @@ namespace HW1
         {
             MessageDie?.Invoke();
         }
+
+        
     }
 }

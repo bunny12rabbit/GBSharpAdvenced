@@ -24,11 +24,9 @@ namespace HW1
         public override void Update()
         {
             Pos.X = Pos.X + 30;
-            //Если пуля ушла за экран, возвращаем ее в начало (новый выстрел)
-            if (Pos.X > Game.Width) ResetPos();
         }
 
-        public override void ResetPos()
+        public void ResetPos()
         {
             Pos.X = 0;
         }

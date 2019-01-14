@@ -157,6 +157,7 @@ namespace HW1
             Program.form1.Hide();
             splash = false;
             form2.FormClosing += Form2_Closing;
+
         }
 
         //Кнопка Рекорды
