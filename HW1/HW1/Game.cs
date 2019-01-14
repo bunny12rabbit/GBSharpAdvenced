@@ -121,7 +121,6 @@ namespace HW1
 
             if (_ship.Energy < 100)
             {
-                _repairKit?.Resp();
                 _repairKit?.Draw();
             }
             Buffer.Render();
@@ -168,6 +167,14 @@ namespace HW1
                     System.Media.SystemSounds.Asterisk.Play();
                     //_asteroids[i] = null;
                     _asteroids[i].ResetPos();
+                    if (_ship.Energy < 100 && _repairKit == null)
+                    {
+                        _repairKit = new RepairKit(
+                            new Point(Game.Width, rnd.Next(10, Game.Height - 10)),
+                            new Point(5, 0),
+                            new Size(40, 40));
+                        _repairKit?.Resp();
+                    }
                 }
                 if (_ship.Energy <= 0)
                 {
@@ -175,11 +182,10 @@ namespace HW1
                 }
                 _repairKit?.Update();
 
-                if (_repairKit.Collision(_ship))
+                if (_repairKit != null && _repairKit.Collision(_ship))
                 {
                     _repairKit.Resp();
                     _ship?.EnergyUp(_repairKit.Power);
-                    //add_score_point(POINT_FOR_RK);
                 }
             }
         }
@@ -226,7 +232,7 @@ namespace HW1
                 while (dirAsteroid == 0);
                 _asteroids[i] = new Asteroid(new Point(rnd.Next(0, Width), rnd.Next(0, Height)), new Point(dirAsteroid, dirAsteroid), new Size(aSize, aSize));
             }
-            _repairKit = new RepairKit(new Point(Game.Width, rnd.Next(10, Game.Height)), new Point(5, 0), new Size(20, 20));
+            //_repairKit = new RepairKit(new Point(Game.Width, rnd.Next(10, Game.Height-10)), new Point(5, 0), new Size(40, 40));
         }
 
         public static void Finish()

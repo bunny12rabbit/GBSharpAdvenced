@@ -43,7 +43,7 @@ namespace HW1
         {
             Random rnd = new Random();
             Pos.X = Game.Width;
-            Pos.Y = rnd.Next(10, Game.Height);
+            Pos.Y = rnd.Next(10, Game.Height-10);
         }
         //public new Rectangle Rect => new Rectangle(Pos, Size);
        // public new bool Collision(ICollision o) => o.Rect.IntersectsWith(this.Rect);
