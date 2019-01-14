@@ -88,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="asteroid.ico" />
+    <None Include="ship.png" />
+    <None Include="recovery.png" />
+    <None Include="planet.png" />
+    <None Include="asteroid.png" />
     <None Include="bin\Debug\ship.png" />
     <None Include="bin\Debug\recovery.png" />
     <None Include="bin\Debug\planet.png" />
