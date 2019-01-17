@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace HW5.Model
         }
         public string LastName
         {
-            get { return LastName; }
+            get { return lastName; }
             set
             {
                 lastName = value;
@@ -73,9 +74,9 @@ namespace HW5.Model
             }
         }
 
-        public static List<Employee> GetEmployees()
+        public static ObservableCollection<Employee> GetEmployees()
         {
-            var result = new List<Employee>()
+            var result = new ObservableCollection<Employee>()
             {
                 new Employee
                 {

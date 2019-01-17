@@ -11,13 +11,28 @@ namespace HW5.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        List<Employee> employees;
-        Employee selectedEmployee;
-        public ObservableCollection<Employee> Employees { get; private set; }
+        ObservableCollection<Employee> employees;
+        public Employee selectedEmployee;
+        public ObservableCollection<Employee> Employees { get { return this.employees; }  }
+
+        public Employee SelectedEmployee
+        {
+            get { return selectedEmployee; }
+            set
+            {
+                selectedEmployee = value;
+                OnPropertyChanged("SelectedEmployee");
+            }
+        }
+
+
 
         public MainWindowViewModel()
         {
             employees = Employee.GetEmployees();
+             
+
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

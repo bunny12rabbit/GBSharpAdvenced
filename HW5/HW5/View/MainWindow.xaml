@@ -13,8 +13,54 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="465*"/>
+            <ColumnDefinition Width="638*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                    Background="Red" HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch">
+            <TextBlock FontWeight="Bold" FontSize="24" HorizontalAlignment="Center">Сотрудники</TextBlock>
+            <ListView ItemsSource="{Binding Employees}" Background="Aqua" x:Name="qq" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding LastName}"/>
+                             
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackPanel>
+        
+        <ListView Grid.Column="2" ItemsSource="{Binding Department}" Margin="0,0,-0.4,172.4" Grid.RowSpan="2">
+            <TextBlock Grid.Column="1" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center">Департаменты</TextBlock>
+        </ListView>
+ 
+
+        <StackPanel Grid.Row="1"   Background="Beige">
+            <TextBlock FontWeight="Bold" FontSize="18">Фамилия:</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="18">Имя:</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="18">Отчество:</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="18">Дата рождения:</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="18">Возраст:</TextBlock>
+            <TextBlock FontWeight="Bold" FontSize="18">Департамент:</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1"  Background="Aqua" Grid.ColumnSpan="2">
+            <TextBlock Text="{Binding Path= SelectedEmployee.LastName}"/>
+            <TextBlock FontWeight="Bold" FontSize="18" Text="{Binding ElementName=qq,Path=SelectedItem.Name}"/>
+            <TextBlock FontWeight="Bold" FontSize="18"/>
+            <TextBlock FontWeight="Bold" FontSize="18"/>
+            <TextBlock FontWeight="Bold" FontSize="18"/>
+            <TextBlock FontWeight="Bold" FontSize="18"/>
+        </StackPanel>
+
     </Grid>
 </Window>
