@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HW5.Model
 {
-    class Department : INotifyPropertyChanged
+    public class Department : INotifyPropertyChanged
     {
         string departmentName;
         public string DepartmentName
@@ -18,6 +19,16 @@ namespace HW5.Model
                 departmentName = value;
                 OnPropertyChanged(departmentName);
             }
+        }
+
+        public static ObservableCollection<Department> GetDepartments()
+        {
+            var result = new ObservableCollection<Department>()
+            {
+                new Department {DepartmentName = "IT" },
+                new Department {DepartmentName = "Отдел продаж"}
+            };
+            return result;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
