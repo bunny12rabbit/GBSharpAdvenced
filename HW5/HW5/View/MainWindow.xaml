@@ -1,0 +1,84 @@
+﻿<Window x:Class="HW5.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW5"
+        xmlns:viewModel="clr-namespace:HW5.ViewModel"
+        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="465*"/>
+            <ColumnDefinition Width="638*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="0"
+                Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch">
+                <TextBlock Style="{StaticResource Header}">Отделы</TextBlock>
+                <ListView x:Name="_Department" ItemsSource="{Binding Departments}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Отдел" Width="Auto" DisplayMemberBinding="{Binding DepartmentName}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Border>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="0"
+                Grid.Column="2" Grid.ColumnSpan="2">
+            <StackPanel HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch">
+                <TextBlock Style="{StaticResource Header}">Сотрудники</TextBlock>
+                <ListView x:Name="_Employee" ItemsSource="{Binding Employees}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Фамилия" Width="Auto" DisplayMemberBinding="{Binding LastName}" />
+                            <GridViewColumn Header="Имя" Width="Auto" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Отчество" Width="Auto" DisplayMemberBinding="{Binding SecondName}" />
+                            <GridViewColumn Header="Возраст" Width="Auto" DisplayMemberBinding="{Binding Age}" />
+                            <GridViewColumn Header="Отдел" Width="Auto" DisplayMemberBinding="{Binding Department}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Border>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" >
+            <StackPanel x:Name="details" Margin="15,15,0,0">
+                <StackPanel.Resources>
+                    <Style BasedOn="{StaticResource Bold}" TargetType="{x:Type TextBlock}" />
+                </StackPanel.Resources>
+                <TextBlock>Фамилия:</TextBlock>
+                <TextBlock>Имя:</TextBlock>
+                <TextBlock>Отчество:</TextBlock>
+                <TextBlock>Дата рождения:</TextBlock>
+                <TextBlock>Возраст:</TextBlock>
+                <TextBlock>Департамент:</TextBlock>
+            </StackPanel>
+        </Border>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1"
+                Grid.Column="1" Grid.ColumnSpan="2">
+            <StackPanel x:Name="dInfo" Margin="15,15,0,0">
+                <StackPanel.Resources>
+                    <Style BasedOn="{StaticResource PaddedText}" TargetType="{x:Type TextBlock}" />
+                </StackPanel.Resources>
+                <TextBlock Text="{Binding ElementName=_Employee, Path=SelectedItem.LastName}"/>
+                <TextBlock Text="{Binding ElementName=_Employee, Path=SelectedItem.Name}"/>
+                <TextBlock Text="{Binding ElementName=_Employee, Path=SelectedItem.SecondName}"/>
+                <TextBlock Text="{Binding ElementName=_Employee, Path=SelectedItem.BirthDay}"/>
+                <TextBlock Text="{Binding ElementName=_Employee, Path=SelectedItem.Age}"/>
+                <TextBlock Text="{Binding ElementName=_Employee, Path=SelectedItem.Department}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
