@@ -10,6 +10,7 @@ namespace HW5.Model
 {
     public class Department : INotifyPropertyChanged
     {
+        int departmentId;
         string departmentName;
         public string DepartmentName
         {
@@ -20,16 +21,23 @@ namespace HW5.Model
                 OnPropertyChanged(departmentName);
             }
         }
+        public int DepartmentId { get; set; }
 
-        public static ObservableCollection<Department> GetDepartments()
+        public Department(string Name, int Id)
         {
-            var result = new ObservableCollection<Department>()
-            {
-                new Department {DepartmentName = "IT" },
-                new Department {DepartmentName = "Отдел продаж"}
-            };
-            return result;
+            DepartmentName = Name;
+            DepartmentId = Id;
         }
+
+        //public static ObservableCollection<Department> GetDepartments()
+        //{
+        //    var result = new ObservableCollection<Department>()
+        //    {
+        //        new Department {DepartmentName = "IT" },
+        //        new Department {DepartmentName = "Отдел продаж"}
+        //    };
+        //    return result;
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

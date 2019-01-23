@@ -73,38 +73,48 @@ namespace HW5.Model
                 OnPropertyChanged(department);
             }
         }
+        public int DepartmentId { get; private set; }
 
-        public static ObservableCollection<Employee> GetEmployees()
+        public Employee(string _Name, string _lName, string _sName, string _bD, int _depId)
         {
-            var result = new ObservableCollection<Employee>()
-            {
-                new Employee
-                {
-                    Name = "Иван",
-                    LastName = "Иванов",
-                    SecondName = "Иванович",
-                    BirthDay = "12.10.1989",
-                    Department = "Отдел продаж"
-                },
-                new Employee
-                {
-                    Name = "Игорь",
-                    LastName = "Кузнецов",
-                    SecondName = "Викторович",
-                    BirthDay = "21.07.1975",
-                    Department = "Отдел сопровождения"
-                },
-                new Employee
-                {
-                    Name = "Андрей",
-                    LastName = "Романенко",
-                    SecondName = "Григорьевич",
-                    BirthDay = "23.10.1992",
-                    Department = "IT"
-                }
-            };
-            return result;
+            Name = _Name;
+            LastName = _lName;
+            SecondName = _sName;
+            BirthDay = _bD;
+            DepartmentId = _depId;
         }
+
+        //public static ObservableCollection<Employee> GetEmployees()
+        //{
+        //    var result = new ObservableCollection<Employee>()
+        //    {
+        //        new Employee
+        //        {
+        //            Name = "Иван",
+        //            LastName = "Иванов",
+        //            SecondName = "Иванович",
+        //            BirthDay = "12.10.1989",
+        //            Department = "Отдел продаж"
+        //        },
+        //        new Employee
+        //        {
+        //            Name = "Игорь",
+        //            LastName = "Кузнецов",
+        //            SecondName = "Викторович",
+        //            BirthDay = "21.07.1975",
+        //            Department = "Отдел сопровождения"
+        //        },
+        //        new Employee
+        //        {
+        //            Name = "Андрей",
+        //            LastName = "Романенко",
+        //            SecondName = "Григорьевич",
+        //            BirthDay = "23.10.1992",
+        //            Department = "IT"
+        //        }
+        //    };
+        //    return result;
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

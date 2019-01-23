@@ -18,42 +18,40 @@
             <ColumnDefinition Width="638*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="0"
+        <TextBlock Style="{StaticResource Header}" Grid.ColumnSpan="2">Отделы</TextBlock>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1"
                 Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch">
-                <TextBlock Style="{StaticResource Header}">Отделы</TextBlock>
-                <ListView x:Name="_Department" ItemsSource="{Binding Departments}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Отдел" Width="Auto" DisplayMemberBinding="{Binding DepartmentName}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
+
+            <ListView x:Name="_Department" ItemsSource="{Binding Departments}"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.CanContentScroll="True">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Отдел" Width="Auto" DisplayMemberBinding="{Binding DepartmentName}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Border>
-        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="0"
+        <TextBlock Style="{StaticResource Header}" Grid.Column="2">Сотрудники</TextBlock>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1"
                 Grid.Column="2" Grid.ColumnSpan="2">
-            <StackPanel HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch">
-                <TextBlock Style="{StaticResource Header}">Сотрудники</TextBlock>
-                <ListView x:Name="_Employee" ItemsSource="{Binding Employees}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Фамилия" Width="Auto" DisplayMemberBinding="{Binding LastName}" />
-                            <GridViewColumn Header="Имя" Width="Auto" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn Header="Отчество" Width="Auto" DisplayMemberBinding="{Binding SecondName}" />
-                            <GridViewColumn Header="Возраст" Width="Auto" DisplayMemberBinding="{Binding Age}" />
-                            <GridViewColumn Header="Отдел" Width="Auto" DisplayMemberBinding="{Binding Department}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
+            <ListView x:Name="_Employee" ItemsSource="{Binding Employees}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Фамилия" Width="Auto" DisplayMemberBinding="{Binding LastName}" />
+                        <GridViewColumn Header="Имя" Width="Auto" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Отчество" Width="Auto" DisplayMemberBinding="{Binding SecondName}" />
+                        <GridViewColumn Header="Возраст" Width="Auto" DisplayMemberBinding="{Binding Age}" />
+                        <GridViewColumn Header="Отдел" Width="Auto" DisplayMemberBinding="{Binding Department}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Border>
-        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" >
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="2" >
             <StackPanel x:Name="details" Margin="15,15,0,0">
                 <StackPanel.Resources>
                     <Style BasedOn="{StaticResource Bold}" TargetType="{x:Type TextBlock}" />
@@ -66,8 +64,8 @@
                 <TextBlock>Департамент:</TextBlock>
             </StackPanel>
         </Border>
-        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1"
-                Grid.Column="1" Grid.ColumnSpan="2">
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="2"
+                Grid.Column="1">
             <StackPanel x:Name="dInfo" Margin="15,15,0,0">
                 <StackPanel.Resources>
                     <Style BasedOn="{StaticResource PaddedText}" TargetType="{x:Type TextBlock}" />
