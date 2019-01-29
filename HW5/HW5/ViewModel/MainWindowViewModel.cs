@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace HW5.ViewModel
         public ObservableCollection<Employee> Employees { get { return this.employees; }  }
         public ObservableCollection<Department> Departments { get { return this.department; } }
         static Random rnd = new Random();
+
+        string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Lesson7;" +
+            "Integrated Security=True;Pooling=False";
 
         public Employee SelectedEmployee
         {
@@ -38,28 +42,72 @@ namespace HW5.ViewModel
         /// </summary>
         /// <param name="DepartmentCount">Количество отделов для генерации</param>
         /// <param name="EmployeeCont">Количество сотрудников для генерации</param>
-        public void _InitializeModel( int DepartmentCount, int EmployeeCont)
+        public void _InitializeModel(int DepartmentCount, int EmployeeCont)
         {
-            //employees = Employee.GetEmployees();
-            //department = Department.GetDepartments();
-            employees = new ObservableCollection<Employee>();
-            department = new ObservableCollection<Department>();
-
-            for (int i = 0; i < DepartmentCount; i++)
+            try
             {
-                department.Add(new Department($"Отдел {i + 1}", i));
+                var rnd = new Random();
+                for (int i = 0; i < 100; i++)
+                {
+                    var employee = new Employee(
+                        $"Имя_{i + 1}",
+                        $"Фамилия_{i + 1}",
+                        $"Отчество_{i + 1}",
+                        $"{rnd.Next(1, 30)}.{rnd.Next(1, 12)}.{rnd.Next(1960, 2000)}",
+                        rnd.Next(department.Count));
+
+                    var sql = String.Format("INSERT INTO People (Lastname, Name, SecondName, BirthDay, DepartmentId) " +
+                                            "VALUES (N'{0}', '{1}', '{2}', '{3}', '{4}')",
+                                            employee.LastName,
+                                            employee.Name,
+                                            employee.SecondName,
+                                            employee.BirthDay,
+                                            employee.DepartmentId);
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
-
-            for (int i = 0; i < EmployeeCont; i++)
+            catch
             {
-                employees.Add(
-                    new Employee($"Имя_{i + 1}",
-                    $"Фамилия_{i + 1}",
-                    $"Отчество_{i + 1}",
-                    $"{rnd.Next(1, 30)}.{rnd.Next(1,12)}.{rnd.Next(1960, 2000)}",
-                    rnd.Next(department.Count)));
+
             }
         }
+
+        #region Старая инициализация модели
+        /// <summary>
+        /// Метод инициализации модели. Генерирует отделы и сотрудников
+        /// </summary>
+        /// <param name="DepartmentCount">Количество отделов для генерации</param>
+        /// <param name="EmployeeCont">Количество сотрудников для генерации</param>
+        //public void _InitializeModel(int DepartmentCount, int EmployeeCont)
+        //{
+        //    //employees = Employee.GetEmployees();
+        //    //department = Department.GetDepartments();
+        //    employees = new ObservableCollection<Employee>();
+        //    department = new ObservableCollection<Department>();
+
+        //    for (int i = 0; i < DepartmentCount; i++)
+        //    {
+        //        department.Add(new Department($"Отдел {i + 1}", i));
+        //    }
+
+        //    for (int i = 0; i < EmployeeCont; i++)
+        //    {
+        //        employees.Add(
+        //            new Employee($"Имя_{i + 1}",
+        //            $"Фамилия_{i + 1}",
+        //            $"Отчество_{i + 1}",
+        //            $"{rnd.Next(1, 30)}.{rnd.Next(1, 12)}.{rnd.Next(1960, 2000)}",
+        //            rnd.Next(department.Count)));
+        //    }
+        //}
+        #endregion
 
         public void DeleteDep(int index)
         {

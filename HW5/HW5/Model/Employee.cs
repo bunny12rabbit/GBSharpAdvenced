@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,6 +85,7 @@ namespace HW5.Model
             DepartmentId = _depId;
         }
 
+        #region Старая генерация списка работников
         //public static ObservableCollection<Employee> GetEmployees()
         //{
         //    var result = new ObservableCollection<Employee>()
@@ -115,6 +117,7 @@ namespace HW5.Model
         //    };
         //    return result;
         //}
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 

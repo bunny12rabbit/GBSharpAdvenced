@@ -29,6 +29,7 @@ namespace HW5.Model
             DepartmentId = Id;
         }
 
+        #region Старая генерация отделов
         //public static ObservableCollection<Department> GetDepartments()
         //{
         //    var result = new ObservableCollection<Department>()
@@ -38,7 +39,7 @@ namespace HW5.Model
         //    };
         //    return result;
         //}
-
+        #endregion
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
